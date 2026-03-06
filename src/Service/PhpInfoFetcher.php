@@ -59,6 +59,10 @@ class PhpInfoFetcher
             throw new \RuntimeException("HTTP {$httpCode} returned from {$url}");
         }
 
+        if (stripos($html, '<?php') !== false) {
+            throw new \RuntimeException('The URL returned the PHP source code instead of executing it. Make sure your web server is configured to execute PHP files.');
+        }
+
         if (stripos($html, 'phpinfo()') === false && stripos($html, 'PHP Version') === false) {
             throw new \RuntimeException('The URL does not seem to return a phpinfo() page.');
         }

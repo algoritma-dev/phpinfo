@@ -154,7 +154,10 @@ class InspectPhpInfoCommand extends Command
         $data = $this->parser->parse($html);
 
         if ($data === []) {
-            $io->error('Could not parse phpinfo() output. Make sure the URL returns a valid phpinfo() page.');
+            $io->error([
+                'Could not parse phpinfo() output. Make sure the URL returns a valid phpinfo() page.',
+                'If you are using a custom web server, ensure it is configured to execute PHP files.',
+            ]);
 
             return Command::FAILURE;
         }
