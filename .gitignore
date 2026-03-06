@@ -3,3 +3,4 @@
 .castor.stub.php
 .php-cs-fixer.cache
 /.phpunit.cache/
+/composer.lock
