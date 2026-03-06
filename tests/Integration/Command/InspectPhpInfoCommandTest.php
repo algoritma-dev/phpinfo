@@ -45,7 +45,7 @@ class InspectPhpInfoCommandTest extends TestCase
         $application = new Application();
         $application->addCommand($command);
 
-        $command = $application->find('php:fpm-info');
+        $command = $application->find('php:info');
         $this->commandTester = new CommandTester($command);
     }
 
@@ -100,7 +100,7 @@ class InspectPhpInfoCommandTest extends TestCase
         ]);
 
         $this->assertEquals(0, $exitCode);
-        $this->assertStringContainsString('PHP-FPM Info', $this->commandTester->getDisplay());
+        $this->assertStringContainsString('PHP Info', $this->commandTester->getDisplay());
         $this->assertStringContainsString('Temp file deleted', $this->commandTester->getDisplay());
     }
 
