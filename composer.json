@@ -4,7 +4,7 @@
     "type": "library",
     "require": {
         "php": ">=8.4",
-        "symfony/console": "^6.4|^7.4",
+        "symfony/console": "^6.4|^7.4|^8.0",
         "symfony/dotenv": "^6.4|^7.4"
     },
     "require-dev": {
