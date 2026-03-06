@@ -44,7 +44,7 @@ if (file_exists($projectRoot . '/composer.json')) {
 }
 
 if (file_exists($projectRoot . '/' . $dotenvPath)) {
-    (new Dotenv($envVarName, $debugVarName))->loadEnv($projectRoot . '/' . $dotenvPath);
+    new Dotenv($envVarName, $debugVarName)->loadEnv($projectRoot . '/' . $dotenvPath);
 }
 
 $command = new InspectPhpInfoCommand();
