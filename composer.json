@@ -1,0 +1,44 @@
+{
+    "name": "algoritma/phpinfo",
+    "description": "A lightweight CLI tool to fetch and inspect PHP-FPM settings by running `phpinfo()` via HTTP in your web application's environment. This tool is particularly useful for verifying the actual configuration of a running FPM instance when CLI settings might differ.",
+    "type": "library",
+    "require": {
+        "php": ">=8.4",
+        "symfony/console": "^7.4",
+        "symfony/dotenv": "^8.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^12.5",
+        "algoritma/php-coding-standards": "^3.0"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Algoritma\\PhpInfo\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Algoritma\\PhpInfo\\Tests\\": "tests/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Algoritma srl"
+        }
+    ],
+    "minimum-stability": "stable",
+    "config": {
+        "allow-plugins": {
+            "phpstan/extension-installer": true,
+            "algoritma/php-coding-standards": true
+        }
+    },
+    "scripts": {
+        "cs-check": "php-cs-fixer fix --dry-run --diff",
+        "cs-fix": "php-cs-fixer fix --diff",
+        "rector-check": "rector process --dry-run",
+        "rector-fix": "rector process",
+        "phpstan": "phpstan analyze --memory-limit=-1"
+    }
+}

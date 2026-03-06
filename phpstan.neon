@@ -1,0 +1,10 @@
+includes:
+	- phpstan-algoritma-config.php
+
+parameters:
+	level: 6
+	phpVersion: 80400
+	excludePaths:
+		- **/node_modules/*
+		- **/vendor/*
+

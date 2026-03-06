@@ -1,0 +1,55 @@
+#!/usr/bin/env php
+# This script is used to inspect PHP-FPM info by running phpinfo() in a temporary file and parsing the output.
+# It is intended to be run from the command line and is not meant to be included in other scripts.
+<?php
+
+use Algoritma\PhpInfo\Command\InspectPhpInfoCommand;
+use Symfony\Component\Dotenv\Dotenv;
+
+$vendorCandidates = [
+        '../../../autoload.php',
+        '../vendor/autoload.php',
+        '../../vendor/autoload.php',
+        '../../../vendor/autoload.php',
+];
+
+$vendorBase = null;
+foreach ($vendorCandidates as $candidate) {
+    if (file_exists(__DIR__ . '/' . $candidate)) {
+        require_once __DIR__ . '/' . $candidate;
+        // Determine the project root directory where composer.json is located.
+        // It's the parent of the 'vendor' directory (or the root itself if autoload.php is elsewhere)
+        $vendorBase = dirname(__DIR__ . '/' . $candidate);
+        if (basename($vendorBase) === 'vendor') {
+            $vendorBase = dirname($vendorBase);
+        }
+        break;
+    }
+}
+
+$app = new Symfony\Component\Console\Application();
+
+// Load .env file based on composer.json config if available
+$projectRoot = $vendorBase ?: getcwd();
+$dotenvPath = '.env';
+$envVarName = 'APP_ENV';
+$debugVarName = 'APP_DEBUG';
+
+if (file_exists($projectRoot . '/composer.json')) {
+    $composerData = json_decode(file_get_contents($projectRoot . '/composer.json'), true);
+    $runtime = $composerData['extra']['runtime'] ?? [];
+    $dotenvPath = $runtime['dotenv_path'] ?? $dotenvPath;
+    $envVarName = $runtime['env_var_name'] ?? $envVarName;
+    $debugVarName = $runtime['debug_var_name'] ?? $debugVarName;
+}
+
+if (file_exists($projectRoot . '/' . $dotenvPath)) {
+    (new Dotenv($envVarName, $debugVarName))->load($projectRoot . '/' . $dotenvPath);
+}
+
+$command = new InspectPhpInfoCommand();
+$app->add($command);
+$app->setDefaultCommand($command->getName(), true);
+
+exit($app->run());
+

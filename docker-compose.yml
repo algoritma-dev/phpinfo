@@ -1,0 +1,15 @@
+x-pull-policy: &pull-policy
+    pull_policy: always
+
+services:
+
+    workspace:
+        <<: *pull-policy
+        image: php:8.4
+        extra_hosts:
+            - host.docker.internal:host-gateway
+        volumes:
+            - ~/.composer:/home/algoritma/.composer
+            - .:/var/www
+        environment:
+            COMPOSER_HOME: '/home/algoritma/.composer'

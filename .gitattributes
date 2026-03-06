@@ -1,0 +1,9 @@
+tests/ export-ignore
+.github/ export-ignore
+.php-cs-fixer.dist.php export-ignore
+docker-compose.yml export-ignore
+Makefile export-ignore
+phpstan.neon export-ignore
+phpstan-algoritma-config.php export-ignore
+phpunit.xml export-ignore
+rector.php export-ignore
