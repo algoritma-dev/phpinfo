@@ -12,6 +12,9 @@
         "algoritma/php-coding-standards": "^3.0"
     },
     "license": "MIT",
+    "bin": [
+        "bin/phpinfo"
+    ],
     "autoload": {
         "psr-4": {
             "Algoritma\\PhpInfo\\": "src/"
