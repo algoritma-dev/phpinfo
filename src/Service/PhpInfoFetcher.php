@@ -4,6 +4,17 @@ namespace Algoritma\PhpInfo\Service;
 
 class PhpInfoFetcher
 {
+    /**
+     * Create a temporary PHP file inside the specified public directory that, when requested, outputs phpinfo().
+     *
+     * The file name is randomized to avoid collisions and guessing, its contents are `<?php phpinfo();`, and
+     * permissions are set to 0644.
+     *
+     * @param string $publicDir Path to the public web directory where the temporary file will be created.
+     * @return string The full path to the created temporary PHP file.
+     *
+     * @throws \RuntimeException If the public directory does not exist, is not writable, or the file could not be written.
+     */
     public function createTempFile(string $publicDir): string
     {
         if (! is_dir($publicDir)) {
@@ -15,7 +26,7 @@ class PhpInfoFetcher
         }
 
         // Random name to avoid collisions and guessing
-        $fileName = '_phpfpminfo_' . bin2hex(random_bytes(8)) . '.php';
+        $fileName = '_phpinfo_' . bin2hex(random_bytes(8)) . '.php';
         $filePath = rtrim($publicDir, '/') . '/' . $fileName;
 
         $content = '<?php phpinfo();';
@@ -30,6 +41,14 @@ class PhpInfoFetcher
         return $filePath;
     }
 
+    /**
+     * Fetches and validates the rendered phpinfo() HTML from the given URL.
+     *
+     * @param string $url The URL expected to return a rendered phpinfo() page.
+     * @param bool $noVerify When true, disables SSL certificate and host verification for the request.
+     * @return string The fetched HTML content.
+     * @throws \RuntimeException If the cURL extension is unavailable, a cURL error occurs, a non-200 HTTP status is returned, the response contains raw PHP source, or the response does not appear to be a phpinfo() page.
+     */
     public function fetchPhpInfo(string $url, bool $noVerify = false): string
     {
         if (! function_exists('curl_init')) {
@@ -41,7 +60,7 @@ class PhpInfoFetcher
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_TIMEOUT        => 15,
-            CURLOPT_USERAGENT      => 'php-fpm-info-command/1.0',
+            CURLOPT_USERAGENT      => 'php-info-command/1.0',
             CURLOPT_SSL_VERIFYPEER => ! $noVerify,
             CURLOPT_SSL_VERIFYHOST => $noVerify ? 0 : 2,
         ]);

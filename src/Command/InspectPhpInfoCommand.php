@@ -16,7 +16,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 #[AsCommand(
-    name: 'php:fpm-info',
+    name: 'php:info',
     description: 'Fetches phpinfo() via HTTP and displays settings in a readable format',
 )]
 class InspectPhpInfoCommand extends Command
@@ -94,6 +94,18 @@ class InspectPhpInfoCommand extends Command
             );
     }
 
+    /**
+     * Run the command that fetches, parses, filters, and renders a remote phpinfo() page.
+     *
+     * The command determines the base URL and public directory, creates a temporary PHP file
+     * in the public directory, requests the phpinfo() page, parses the returned HTML into
+     * structured data, applies requested filters (important, sections, or search), renders
+     * the results to the console, and ensures the temporary file is removed.
+     *
+     * @param InputInterface  $input  Console input (arguments and options).
+     * @param OutputInterface $output Console output.
+     * @return int Command::SUCCESS on successful render or when no entries match filters; Command::FAILURE on error conditions (missing base URL, temp file creation/fetch/parsing failures).
+     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
@@ -132,7 +144,7 @@ class InspectPhpInfoCommand extends Command
         $fileName = basename($tmpFile);
         $url      = "{$baseUrl}/{$fileName}";
 
-        $io->title('PHP-FPM Info');
+        $io->title('PHP Info');
         $io->text("Temp file : <comment>{$tmpFile}</comment>");
         $io->text("Requesting: <href={$url}>{$url}</>");
         $io->newLine();
