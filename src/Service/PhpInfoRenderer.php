@@ -100,9 +100,7 @@ class PhpInfoRenderer
 
     private function getTerminalWidth(): int
     {
-        $terminal = new Terminal();
-
-        return $terminal->getWidth();
+        return new Terminal()->getWidth();
     }
 
     private function formatValue(string $value): string
