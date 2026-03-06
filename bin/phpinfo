@@ -7,7 +7,7 @@ use Algoritma\PhpInfo\Command\InspectPhpInfoCommand;
 use Symfony\Component\Dotenv\Dotenv;
 
 $vendorCandidates = [
-        '../../../autoload.php',
+        '../../../../vendor/autoload.php',
         '../vendor/autoload.php',
         '../../vendor/autoload.php',
         '../../../vendor/autoload.php',

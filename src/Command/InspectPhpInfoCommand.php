@@ -106,7 +106,7 @@ class InspectPhpInfoCommand extends Command
         $output->getFormatter()->setStyle('warn', new OutputFormatterStyle('yellow', null, ['bold']));
         $output->getFormatter()->setStyle('section', new OutputFormatterStyle('black', 'cyan', ['bold']));
 
-        $baseUrl = $input->getArgument('base-url') ?: getenv('APP_URL');
+        $baseUrl = $input->getArgument('base-url') ?: $_ENV['APP_URL'] ?? getenv('APP_URL');
 
         if (! $baseUrl) {
             $io->error('The "base-url" argument is required or must be set via APP_URL environment variable.');
@@ -115,7 +115,7 @@ class InspectPhpInfoCommand extends Command
         }
 
         $baseUrl = rtrim((string) $baseUrl, '/');
-        $publicDir = $input->getArgument('public-dir') ?: getenv('APP_PUBLIC_DIR') ?: $this->guessPublicDir();
+        $publicDir = $input->getArgument('public-dir') ?: $_ENV['APP_PUBLIC_DIR'] ?? getenv('APP_PUBLIC_DIR') ?: $this->guessPublicDir();
         $sections  = $input->getOption('section');
         $search    = $input->getOption('search');
         $important = $input->getOption('important');
