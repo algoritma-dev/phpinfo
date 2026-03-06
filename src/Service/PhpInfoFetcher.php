@@ -15,7 +15,7 @@ class PhpInfoFetcher
         }
 
         // Random name to avoid collisions and guessing
-        $fileName = '_phpfpminfo_' . bin2hex(random_bytes(8)) . '.php';
+        $fileName = '_phpinfo_' . bin2hex(random_bytes(8)) . '.php';
         $filePath = rtrim($publicDir, '/') . '/' . $fileName;
 
         $content = '<?php phpinfo();';
@@ -41,7 +41,7 @@ class PhpInfoFetcher
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_TIMEOUT        => 15,
-            CURLOPT_USERAGENT      => 'php-fpm-info-command/1.0',
+            CURLOPT_USERAGENT      => 'php-info-command/1.0',
             CURLOPT_SSL_VERIFYPEER => ! $noVerify,
             CURLOPT_SSL_VERIFYHOST => $noVerify ? 0 : 2,
         ]);
