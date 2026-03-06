@@ -16,7 +16,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 #[AsCommand(
-    name: 'php:fpm-info',
+    name: 'php:info',
     description: 'Fetches phpinfo() via HTTP and displays settings in a readable format',
 )]
 class InspectPhpInfoCommand extends Command
@@ -132,7 +132,7 @@ class InspectPhpInfoCommand extends Command
         $fileName = basename($tmpFile);
         $url      = "{$baseUrl}/{$fileName}";
 
-        $io->title('PHP-FPM Info');
+        $io->title('PHP Info');
         $io->text("Temp file : <comment>{$tmpFile}</comment>");
         $io->text("Requesting: <href={$url}>{$url}</>");
         $io->newLine();
