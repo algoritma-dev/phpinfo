@@ -1,6 +1,6 @@
 {
     "name": "algoritma/phpinfo",
-    "description": "A lightweight CLI tool to fetch and inspect PHP-FPM settings by running `phpinfo()` via HTTP in your web application's environment. This tool is particularly useful for verifying the actual configuration of a running FPM instance when CLI settings might differ.",
+    "description": "A lightweight CLI tool to fetch and inspect PHP settings by running `phpinfo()` via HTTP in your web application's environment. This tool is particularly useful for verifying the actual configuration of a running FPM instance when CLI settings might differ.",
     "type": "library",
     "require": {
         "php": ">=8.4",

@@ -1,10 +1,10 @@
-# PHP-FPM Info Inspector
+# PHP Info Inspector
 
-A lightweight CLI tool to fetch and inspect PHP-FPM settings by running `phpinfo()` via HTTP in your web application's environment. This tool is particularly useful for verifying the actual configuration of a running FPM instance when CLI settings might differ.
+A lightweight CLI tool to fetch and inspect PHP settings by running `phpinfo()` via HTTP in your web application's environment. This tool is particularly useful for verifying the actual configuration of a running FPM instance when CLI settings might differ.
 
 ## Features
 
-- **Accurate Info**: Fetches settings from the perspective of the web server (FPM), not the CLI.
+- **Accurate Info**: Fetches settings from the perspective of the web server, not the CLI.
 - **Secure**: Uses a randomly named temporary file that is automatically deleted after each request.
 - **Filtering**: View only important settings, search for specific keys, or filter by extension/section.
 - **Colorized Output**: Easy-to-read terminal output with a legend for local vs. default values.
@@ -33,7 +33,7 @@ composer global require algoritma/phpinfo
 
 ## Utilization
 
-The tool provides a single command: `php:fpm-info`.
+The tool provides a single command: `php:info`.
 
 ### Basic Usage
 

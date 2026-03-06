@@ -1,5 +1,5 @@
 #!/usr/bin/env php
-# This script is used to inspect PHP-FPM info by running phpinfo() in a temporary file and parsing the output.
+# This script is used to inspect PHP info by running phpinfo() in a temporary file and parsing the output.
 # It is intended to be run from the command line and is not meant to be included in other scripts.
 <?php
 
